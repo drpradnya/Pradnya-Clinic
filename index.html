@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Dr. Pradnya's Homeopathy Clinic, Near Reshimbagh, Nagpur. Dr. Pradnya Gawande, B.H.M.S., CCMP, with 6+ years of clinical experience. Book a consultation.">
+<title>Dr. Pradnya's Homeopathy Clinic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Concept: a calm botanical clinic with a lab-notebook edge. Pellets (globules) drift in the hero and
+   shy away from the cursor, a glass vial with a 30C label holds the hero, and a consultation stepper
+   shows the process as a progress ring. Forest green with one lilac accent for the techy touches. */
+:root{
+  --bg:#F4F8F2; --panel:#FFFFFF; --ink:#10281F; --muted:#486156; --line:#D6E3D9; --soft:#E4F0E6;
+  --accent:#17795A; --on-accent:#FFFFFF; --accent2:#6F56C9; --glass:rgba(255,255,255,.62);
+  --tbc-bg:#FFF4C2; --tbc-ink:#5A4500;
+  --f-display:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --shadow:0 18px 50px -24px rgba(16,40,31,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#08140F; --panel:#0E211A; --ink:#E5F3EA; --muted:#9BB6A8; --line:#1E392D; --soft:#11302A;
+    --accent:#4FD6A0; --on-accent:#05221A; --accent2:#A592FF; --glass:rgba(14,33,26,.62);
+    --tbc-bg:#3A3210; --tbc-ink:#F5E7A8; --shadow:0 18px 50px -24px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#08140F; --panel:#0E211A; --ink:#E5F3EA; --muted:#9BB6A8; --line:#1E392D; --soft:#11302A;
+  --accent:#4FD6A0; --on-accent:#05221A; --accent2:#A592FF; --glass:rgba(14,33,26,.62);
+  --tbc-bg:#3A3210; --tbc-ink:#F5E7A8; --shadow:0 18px 50px -24px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:17px; line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-bottom:84px;
+}
+.wrap{max-width:1120px; margin:0 auto}
+h1,h2,h3{font-family:var(--f-display); font-weight:400; line-height:1.04; margin:0; text-wrap:balance; letter-spacing:-.01em}
+h2{font-size:clamp(34px,5vw,54px)}
+h3{font-size:26px}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent2); outline-offset:3px; border-radius:6px}
+.mono{font-family:var(--f-mono); font-size:12.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted)}
+.tbc{background:var(--tbc-bg); color:var(--tbc-ink); border-radius:4px; padding:0 5px}
+section{padding-block:84px 8px}
+.head{display:grid; gap:12px; margin-bottom:34px; max-width:40em}
+.head p{color:var(--muted)}
+
+/* buttons */
+.btn{
+  position:relative; display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:50px;
+  padding:12px 26px; border-radius:999px; background:var(--accent); color:var(--on-accent);
+  font:700 16px var(--f-body); text-decoration:none; border:0; cursor:pointer; overflow:hidden;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.btn::after{content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%); transform:translateX(-120%)}
+.btn:hover{transform:translateY(-2px); box-shadow:0 12px 28px -12px var(--accent)}
+.btn:hover::after{transform:translateX(120%); transition:transform .7s ease}
+.btn.ghost{background:transparent; color:var(--ink); border:1.5px solid var(--line)}
+.btn.ghost:hover{border-color:var(--accent); box-shadow:none}
+.btn.small{min-height:42px; padding:8px 18px; font-size:15px}
+.iconbtn{width:44px; height:44px; border-radius:50%; border:1.5px solid var(--line); background:var(--panel); color:var(--ink); cursor:pointer; display:grid; place-items:center}
+.iconbtn:hover{border-color:var(--accent)}
+
+/* header */
+header{display:flex; align-items:center; gap:18px; padding-block:18px}
+.brand{display:flex; align-items:center; gap:12px; text-decoration:none; min-width:0}
+.brand svg{flex:none}
+.brand b{display:block; font-family:var(--f-display); font-weight:400; font-size:23px; line-height:1}
+.brand small{display:block; font-family:var(--f-mono); font-size:11px; letter-spacing:.08em; color:var(--muted); margin-top:4px}
+nav{margin-left:auto; display:flex; gap:26px; font-size:15px; font-weight:500}
+nav a{text-decoration:none; color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.hactions{display:flex; gap:10px; align-items:center}
+
+/* hero */
+.hero{position:relative; border-radius:32px; overflow:hidden; background:linear-gradient(160deg,var(--soft),var(--bg) 70%); border:1px solid var(--line); margin-top:8px}
+#field{position:absolute; inset:0; width:100%; height:100%; display:block}
+.hero-in{position:relative; display:grid; grid-template-columns:1.1fr .9fr; gap:30px; align-items:center; padding:clamp(28px,5vw,64px)}
+.hero h1{font-size:clamp(46px,7.4vw,96px); line-height:.96}
+.hero h1 em{font-style:italic; background:linear-gradient(100deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:var(--accent); -webkit-text-fill-color:transparent}
+.lede{font-size:clamp(18px,2.1vw,21px); color:var(--muted); margin-top:22px; max-width:31em}
+.cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:30px}
+.chips{display:flex; gap:10px; flex-wrap:wrap; margin-top:28px}
+.chip{font-family:var(--f-mono); font-size:12px; letter-spacing:.05em; padding:8px 14px; border-radius:999px; background:var(--glass); border:1px solid var(--line); backdrop-filter:blur(6px)}
+.stage{display:grid; place-items:center; min-height:380px}
+.vial{width:min(100%,280px); height:auto; filter:drop-shadow(0 26px 30px rgba(16,40,31,.28)); transition:transform .25s ease; will-change:transform}
+.vial .wave{animation:wave 6s linear infinite}
+.vial .wave2{animation:wave 9s linear infinite reverse}
+.vial .pel{animation:bob 5s ease-in-out infinite}
+.vial .pel:nth-of-type(2n){animation-duration:6.5s; animation-delay:-2s}
+.vial .pel:nth-of-type(3n){animation-duration:7.5s; animation-delay:-4s}
+@keyframes wave{to{transform:translateX(-120px)}}
+@keyframes bob{50%{transform:translateY(-9px)}}
+.sprig path{stroke-dasharray:1; stroke-dashoffset:0}
+@media (prefers-reduced-motion:no-preference){
+  .sprig path{animation:draw 2.2s ease-out both}
+  @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+}
+
+/* ticker */
+.ticker{overflow:hidden; border-block:1px solid var(--line); margin-top:34px; padding-block:16px}
+.track{display:flex; width:max-content; gap:44px; animation:slide 40s linear infinite}
+.ticker:hover .track{animation-play-state:paused}
+.track span{font-family:var(--f-display); font-style:italic; font-size:28px; white-space:nowrap; display:flex; align-items:center; gap:44px; color:var(--muted)}
+.track span::after{content:""; width:9px; height:9px; border-radius:50%; background:var(--accent)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* stepper */
+.stepper{display:grid; grid-template-columns:1fr 1.15fr; gap:28px; align-items:stretch}
+.tabs{display:grid; gap:10px; align-content:start}
+.tab{
+  text-align:left; border:1.5px solid var(--line); background:var(--panel); border-radius:18px; padding:16px 20px; cursor:pointer;
+  font:600 17px var(--f-body); color:var(--ink); display:flex; align-items:center; gap:14px; transition:border-color .2s, transform .2s;
+}
+.tab:hover{transform:translateX(4px); border-color:var(--accent)}
+.tab span{font-family:var(--f-mono); font-size:12px; color:var(--muted); width:26px}
+.tab[aria-selected="true"]{border-color:var(--accent); background:var(--soft)}
+.tab[aria-selected="true"] span{color:var(--accent)}
+.panel{position:relative; background:var(--panel); border:1px solid var(--line); border-radius:26px; padding:clamp(24px,4vw,40px); display:grid; grid-template-columns:130px 1fr; gap:26px; align-items:center; min-width:0; box-shadow:var(--shadow)}
+.ring{width:130px; height:130px; position:relative}
+.ring svg{width:100%; height:100%; transform:rotate(-90deg)}
+.ring circle{fill:none; stroke-width:9; stroke-linecap:round}
+.ring .bg{stroke:var(--line)}
+.ring .fg{stroke:url(#rg); transition:stroke-dashoffset .6s cubic-bezier(.3,.8,.3,1)}
+.ring b{position:absolute; inset:0; display:grid; place-items:center; font-family:var(--f-display); font-weight:400; font-size:34px}
+.panel h3{margin-bottom:10px}
+.panel p{color:var(--muted)}
+
+/* concerns */
+.grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.card{
+  position:relative; background:var(--panel); border:1px solid var(--line); border-radius:22px; padding:22px; min-width:0; overflow:hidden;
+  transition:transform .15s ease-out, border-color .2s; transform-style:preserve-3d;
+}
+.card::after{content:""; position:absolute; inset:0; background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%), color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%); opacity:0; transition:opacity .25s; pointer-events:none}
+.card:hover{border-color:var(--accent)}
+.card:hover::after{opacity:1}
+.card svg{width:34px; height:34px; stroke:var(--accent); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; margin-bottom:34px}
+.card h3{font-size:24px; margin-bottom:6px}
+.card p{font-size:15px; color:var(--muted)}
+.note{margin-top:22px; font-size:14.5px; color:var(--muted); max-width:46em; padding-left:16px; border-left:3px solid var(--accent2)}
+
+/* about */
+.about{display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(24px,5vw,60px); align-items:center}
+.portrait{position:relative; aspect-ratio:1; max-width:380px; width:100%; margin:0 auto; display:grid; place-items:center}
+.portrait .orbit{position:absolute; inset:0; border-radius:50%; border:1.5px dashed var(--accent); animation:spin 40s linear infinite}
+.portrait .orbit.o2{inset:9%; border-color:var(--accent2); animation-duration:55s; animation-direction:reverse}
+.portrait .core{width:68%; aspect-ratio:1; border-radius:50%; background:linear-gradient(150deg,var(--soft),var(--panel)); border:1px solid var(--line); display:grid; place-items:center; text-align:center; font-family:var(--f-display); font-size:64px; color:var(--accent); box-shadow:var(--shadow)}
+.portrait .core small{display:block; font-family:var(--f-mono); font-size:11px; color:var(--muted); letter-spacing:.06em; margin-top:-6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.creds{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+.cred{font-family:var(--f-mono); font-size:13px; padding:8px 14px; border:1.5px solid var(--line); border-radius:12px; background:var(--panel)}
+.cred b{color:var(--accent)}
+.about p.body{color:var(--muted); margin-top:16px; max-width:34em}
+
+/* booking */
+.book{display:grid; grid-template-columns:1.05fr .95fr; gap:24px; align-items:start}
+form,.preview{background:var(--panel); border:1px solid var(--line); border-radius:26px; padding:clamp(22px,3.5vw,34px); min-width:0}
+form{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+.f{display:grid; gap:6px; min-width:0}
+.f.full{grid-column:1/-1}
+label{font-family:var(--f-mono); font-size:12px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted)}
+input,select,textarea{
+  font:500 16px var(--f-body); color:var(--ink); background:var(--bg); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; min-height:48px; width:100%; min-width:0;
+}
+textarea{resize:vertical; min-height:92px}
+input:focus,select:focus,textarea:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent)}
+.preview{position:sticky; top:20px; background:linear-gradient(170deg,var(--soft),var(--panel))}
+.bubble{background:var(--panel); border:1px solid var(--line); border-radius:6px 20px 20px 20px; padding:16px 18px; margin-top:14px; font-size:15.5px; white-space:pre-wrap; word-break:break-word; min-height:150px}
+.preview .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+.hint{font-size:13.5px; color:var(--muted); margin-top:14px}
+
+/* visit */
+.visit{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+.box{background:var(--panel); border:1px solid var(--line); border-radius:26px; padding:clamp(22px,3.5vw,34px); min-width:0}
+.box h3{margin-bottom:14px}
+.hrs div{display:flex; justify-content:space-between; gap:14px; padding:12px 0; border-bottom:1px solid var(--line)}
+.hrs div:last-child{border-bottom:0}
+.hrs b{font-weight:700}
+.box p{color:var(--muted)}
+.box .btn{margin-top:18px}
+
+/* faq */
+details{border-top:1px solid var(--line); padding:18px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer; list-style:none; display:flex; justify-content:space-between; gap:16px; font-weight:700; font-size:18px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; color:var(--accent); font-size:26px; line-height:1; transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin-top:10px; color:var(--muted); max-width:44em}
+
+footer{margin-top:84px; border-top:1px solid var(--line); padding-block:30px 40px; color:var(--muted); font-size:14px; display:grid; gap:10px}
+footer b{color:var(--ink)}
+
+.dock{
+  position:fixed; left:0; right:0; bottom:0; z-index:20; display:none;
+  padding:10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  background:var(--glass); backdrop-filter:blur(14px); border-top:1px solid var(--line);
+}
+.dock .btn{width:100%}
+
+@media (max-width:900px){
+  nav{display:none}
+  .hactions{margin-left:auto}
+  .hero-in{grid-template-columns:1fr}
+  .stage{min-height:300px; order:-1}
+  .vial{width:200px}
+  .stepper,.about,.book,.visit{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr 1fr}
+  .preview{position:static}
+  section{padding-top:64px}
+  .dock{display:block}
+}
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr}
+  form{grid-template-columns:1fr}
+  .panel{grid-template-columns:1fr; justify-items:start}
+  .hactions .btn{display:none}
+  .btn{width:100%}
+  .btn.small{width:auto}
+  .brand small{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .track,.portrait .orbit,.vial .wave,.vial .wave2,.vial .pel{animation:none}
+  .ticker{overflow-x:auto}
+}
+
+/* ---- v3 additions ---- */
+html{scroll-padding-top:96px}
+header{position:sticky; top:max(10px, env(safe-area-inset-top, 0px)); z-index:30; margin-top:12px; padding:10px 12px 10px 20px; background:var(--glass); -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px); border:1px solid var(--line); border-radius:999px; box-shadow:var(--shadow)}
+.brand span{min-width:0}
+.facts{display:grid; grid-template-columns:repeat(4,1fr); margin-top:26px; border:1px solid var(--line); border-radius:22px; background:var(--panel); overflow:hidden}
+.fact{padding:20px 22px; border-right:1px solid var(--line); min-width:0}
+.fact:last-child{border-right:0}
+.fact b{display:block; font-family:var(--f-display); font-weight:400; font-size:clamp(26px,3vw,32px); line-height:1.05}
+.fact span{display:block; color:var(--muted); font-size:14px; margin-top:6px; line-height:1.4}
+.qwrap{position:relative; background:linear-gradient(160deg,var(--soft),var(--panel)); border:1px solid var(--line); border-radius:30px; padding:clamp(28px,6vw,72px); overflow:hidden}
+.qwrap::before{content:"\201C"; position:absolute; top:-30px; left:20px; font-family:var(--f-display); font-size:260px; line-height:1; color:var(--accent); opacity:.12; pointer-events:none}
+.quote{position:relative; margin:0; min-height:230px; transition:opacity .22s ease}
+.quote.swap{opacity:0}
+.quote blockquote{margin:0; font-family:var(--f-display); font-size:clamp(26px,4.2vw,46px); line-height:1.15; max-width:24em; text-wrap:balance}
+.quote figcaption{margin-top:22px; font-family:var(--f-mono); font-size:12.5px; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; max-width:40em; line-height:1.5}
+.qctl{position:relative; display:flex; align-items:center; gap:14px; margin-top:26px; flex-wrap:wrap}
+.dots{display:flex; gap:8px; align-items:center}
+.dots button{position:relative; width:10px; height:10px; padding:0; border:0; border-radius:50%; background:var(--line); cursor:pointer; transition:width .25s, background .25s}
+.dots button::after{content:""; position:absolute; inset:-14px -5px}
+.dots button[aria-current="true"]{width:28px; border-radius:6px; background:var(--accent)}
+.open{display:inline-flex; align-items:center; gap:9px; font-size:14px; font-weight:700; padding:7px 14px; border-radius:999px; background:var(--soft); margin-bottom:12px}
+.open i{width:9px; height:9px; border-radius:50%; background:var(--muted)}
+.open.on i{background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent)}
+.hrs b{text-align:right}
+.how{margin:14px 0 0; padding-left:20px; color:var(--muted); font-size:14.5px}
+.how li{margin-bottom:4px}
+details ul{margin:12px 0 0; padding-left:20px; color:var(--muted); max-width:44em}
+details li{margin-bottom:10px}
+details li b{color:var(--ink); font-weight:700}
+.preview{top:96px}
+@media (max-width:900px){
+  .facts{grid-template-columns:1fr 1fr}
+  .fact{border-bottom:1px solid var(--line)}
+  .fact:nth-child(2n){border-right:0}
+  .fact:nth-last-child(-n+2){border-bottom:0}
+}
+@media (max-width:560px){
+  header{padding:8px 8px 8px 14px; gap:10px; border-radius:28px}
+  .brand{gap:10px}
+  .brand svg{width:32px; height:32px}
+  .brand b{font-size:18px; line-height:1.05}
+  .fact{padding:16px}
+  .quote{min-height:250px}
+  .qwrap::before{font-size:180px}
+}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="brand" href="#top" aria-label="Dr. Pradnya's Homeopathy Clinic, home">
+    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent2)"/></linearGradient></defs><circle cx="20" cy="20" r="19" fill="none" stroke="url(#lg)" stroke-width="2"/><path d="M20 31V15M20 22c-6 0-9-4-9-9 6 0 9 3 9 9zM20 19c5 0 8-3 8-8-5 0-8 3-8 8z" fill="none" stroke="url(#lg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span><b>Dr. Pradnya's Homeopathy Clinic</b><small>NAGPUR &middot; B.H.M.S., CCMP</small></span>
+  </a>
+  <nav aria-label="Sections">
+    <a href="#process">Consultation</a><a href="#concerns">Areas</a><a href="#about">About</a><a href="#book">Book</a><a href="#visit">Visit</a><a href="#faq">FAQ</a>
+  </nav>
+  <div class="hactions">
+    <button class="iconbtn" id="theme" type="button" aria-label="Switch light or dark theme">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z"/></svg>
+    </button>
+    <a class="btn small" data-wa href="#book">Book a consultation</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="hero-in">
+      <div>
+        <p class="mono">Homeopathic clinic, Nagpur</p>
+        <h1 style="margin-top:16px">Care that starts with <em>listening.</em></h1>
+        <p class="lede">Dr. Pradnya Gawande brings more than six years of clinical experience, including hospital work as a Resident Medical Officer, to homeopathic consultations that look for the cause behind your problem.</p>
+        <div class="cta">
+          <a class="btn" data-wa href="#book">Book a consultation</a>
+          <a class="btn ghost" href="#process">How it works</a>
+        </div>
+        <div class="chips">
+          <span class="chip">By appointment</span>
+          <span class="chip">Adults and children</span>
+          <span class="chip">Follow-up care</span>
+          <span class="chip">Near Reshimbagh, Nagpur</span>
+        </div>
+      </div>
+      <div class="stage" id="stage">
+        <svg class="vial" id="vial" viewBox="0 0 240 360" role="img" aria-label="Illustration of a glass remedy vial labelled 30C">
+          <defs>
+            <linearGradient id="glass" x1="0" x2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".55"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".12"/><stop offset="1" stop-color="#ffffff" stop-opacity=".4"/></linearGradient>
+            <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FE3BC"/><stop offset="1" stop-color="#17795A"/></linearGradient>
+            <clipPath id="body"><path d="M62 96h116v196a28 28 0 0 1-28 28H90a28 28 0 0 1-28-28z"/></clipPath>
+          </defs>
+          <rect x="82" y="22" width="76" height="38" rx="10" fill="#10281F"/>
+          <rect x="82" y="22" width="76" height="12" rx="6" fill="#ffffff" opacity=".14"/>
+          <path d="M92 60h56v36H92z" fill="url(#glass)" stroke="#9fb8aa" stroke-opacity=".6"/>
+          <path d="M62 96h116v196a28 28 0 0 1-28 28H90a28 28 0 0 1-28-28z" fill="url(#glass)" stroke="#9fb8aa" stroke-opacity=".7" stroke-width="2"/>
+          <g clip-path="url(#body)">
+            <rect x="60" y="170" width="120" height="160" fill="url(#liq)" opacity=".9"/>
+            <g class="wave"><path d="M-60 170q15-12 30 0t30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0v30H-60z" fill="#7FE3BC" opacity=".75"/></g>
+            <g class="wave2"><path d="M-60 176q15 10 30 0t30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0 30 0v30H-60z" fill="#17795A" opacity=".55"/></g>
+            <circle class="pel" cx="96" cy="250" r="7" fill="#fff" opacity=".85"/>
+            <circle class="pel" cx="128" cy="270" r="5" fill="#fff" opacity=".8"/>
+            <circle class="pel" cx="150" cy="232" r="6" fill="#fff" opacity=".85"/>
+            <circle class="pel" cx="112" cy="296" r="4" fill="#fff" opacity=".7"/>
+            <circle class="pel" cx="142" cy="288" r="5" fill="#fff" opacity=".75"/>
+          </g>
+          <rect x="82" y="118" width="76" height="62" rx="8" fill="#F4F8F2" opacity=".96"/>
+          <text x="120" y="146" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="22" font-weight="500" fill="#10281F">30C</text>
+          <text x="120" y="166" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" letter-spacing="1.4" fill="#486156">POTENCY</text>
+          <path d="M72 110v170" stroke="#fff" stroke-opacity=".5" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><b>6+ years</b><span>Clinical experience, including hospital RMO work</span></div>
+    <div class="fact"><b>B.H.M.S.</b><span>Bachelor of Homeopathic Medicine and Surgery</span></div>
+    <div class="fact"><b>CCMP</b><span>Certificate Course in Modern Pharmacology</span></div>
+    <div class="fact"><b>MD (Homeopathy)</b><span>Currently pursuing</span></div>
+  </div>
+
+  <div class="ticker" aria-label="Areas of consultation">
+    <div class="track">
+      <span>Skin</span><span>Digestion</span><span>Allergies</span><span>Women's health</span><span>Children</span><span>Sleep</span><span>Stress</span><span>Lifestyle</span>
+      <span aria-hidden="true">Skin</span><span aria-hidden="true">Digestion</span><span aria-hidden="true">Allergies</span><span aria-hidden="true">Women's health</span><span aria-hidden="true">Children</span><span aria-hidden="true">Sleep</span><span aria-hidden="true">Stress</span><span aria-hidden="true">Lifestyle</span>
+    </div>
+  </div>
+
+  <section id="process">
+    <div class="head">
+      <p class="mono">The consultation</p>
+      <h2>Four steps, nothing rushed.</h2>
+      <p>Select a step to see what happens.</p>
+    </div>
+    <div class="stepper">
+      <div class="tabs" role="tablist" aria-label="Consultation steps">
+        <button class="tab" role="tab" id="t0" aria-controls="pn" aria-selected="true"><span>01</span>Listen</button>
+        <button class="tab" role="tab" id="t1" aria-controls="pn" aria-selected="false" tabindex="-1"><span>02</span>Understand</button>
+        <button class="tab" role="tab" id="t2" aria-controls="pn" aria-selected="false" tabindex="-1"><span>03</span>Plan</button>
+        <button class="tab" role="tab" id="t3" aria-controls="pn" aria-selected="false" tabindex="-1"><span>04</span>Follow up</button>
+      </div>
+      <div class="panel" id="pn" role="tabpanel" aria-labelledby="t0">
+        <div class="ring">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent2)"/></linearGradient></defs>
+            <circle class="bg" cx="60" cy="60" r="52"/>
+            <circle class="fg" id="fg" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="245"/>
+          </svg>
+          <b id="stepn">1/4</b>
+        </div>
+        <div>
+          <h3 id="steph">Listen</h3>
+          <p id="stepp">A first conversation about what you are experiencing, how it affects your day, and your health history so far.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="concerns">
+    <div class="head">
+      <p class="mono">Areas of consultation</p>
+      <h2>What people come to talk about.</h2>
+      <p>Hover or tap a card. These are the areas patients commonly raise in a homeopathic consultation.</p>
+    </div>
+    <div class="grid">
+      <article class="card tilt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/></svg><h3>Skin</h3><p>Rashes, dryness and other skin concerns.</p></article>
+      <article class="card tilt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4c0 6 10 4 10 10a5 5 0 0 1-10 0c0-5 3-4 3-8"/></svg><h3>Digestion</h3><p>Acidity, bloating and irregular habits.</p></article>
+      <article class="card tilt"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5C12 6 13 4 12 3c-1 1-0 3-0 6.5M14.5 12c3.500 0 5.500 1 6.500 0-1-1-3-1-6.500 0M12 14.500c0 3.500-1 5.500 0 6.500 1-1 0-3 0-6.500M9.500 12C6 12 4 11 3 12c1 1 3 1 6.500 0"/></svg><h3>Allergies</h3><p>Seasonal sneezing, itching and sensitivities.</p></article>
+      <article class="card tilt"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/></svg><h3>Women's health</h3><p>Cycles, hormonal changes and wellbeing.</p></article>
+      <article class="card tilt"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.500 14.500c1 1.500 2.200 2 3.500 2s2.500-.5 3.500-2M9 9.500h.01M15 9.500h.01"/></svg><h3>Children</h3><p>Recurring colds, appetite and growing-up concerns.</p></article>
+      <article class="card tilt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.500A8 8 0 0 1 9.500 4 8.500 8.500 0 1 0 20 14.500z"/></svg><h3>Sleep</h3><p>Trouble falling asleep or staying asleep.</p></article>
+      <article class="card tilt"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12c2-6 4-6 6 0s4 6 6 0 4-6 6 0"/></svg><h3>Stress</h3><p>Work pressure, worry and low energy.</p></article>
+      <article class="card tilt"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg><h3>Lifestyle</h3><p>Routine, diet and everyday habits.</p></article>
+    </div>
+    <p class="note">Homeopathy is a complementary approach. It does not replace emergency care or medicines your doctor has prescribed. Never stop or change a medicine without medical advice.</p>
+  </section>
+
+  <section id="about">
+    <div class="about">
+      <div class="portrait" aria-hidden="true">
+        <div class="orbit"></div><div class="orbit o2"></div>
+        <div class="core"><div>PG<small>B.H.M.S.</small></div></div>
+      </div>
+      <div>
+        <p class="mono">About the doctor</p>
+        <h2 style="margin-top:12px">Dr. Pradnya Gawande</h2>
+        <p class="body">Dr. Pradnya Gawande completed her B.H.M.S. and is CCMP certified. She has more than six years of clinical experience, including work as a Resident Medical Officer (RMO) in hospitals in Nagpur and Chandrapur, and she is now pursuing an MD in Homeopathy. She is passionate about solving people's health problems and understanding their cause in depth.</p>
+        <div class="creds">
+          <span class="cred"><b>B.H.M.S.</b></span>
+          <span class="cred"><b>CCMP</b> certified</span>
+          <span class="cred">MD (Homeopathy), <b>pursuing</b></span>
+          <span class="cred"><b>6+ years</b> experience</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quotes">
+    <div class="head">
+      <p class="mono">Guiding words</p>
+      <h2>Ideas homeopathy was built on.</h2>
+    </div>
+    <div class="qwrap" role="region" aria-roledescription="carousel" aria-label="Quotes about homeopathy">
+      <figure class="quote" id="qf" aria-live="polite">
+        <blockquote id="qt">The physician's high and only mission is to restore the sick to health, to cure, as it is termed.</blockquote>
+        <figcaption id="qa">Samuel Hahnemann, Organon of Medicine, aphorism 1</figcaption>
+      </figure>
+      <div class="qctl">
+        <button class="iconbtn" id="qprev" type="button" aria-label="Previous quote"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="dots" id="dots"></div>
+        <button class="iconbtn" id="qnext" type="button" aria-label="Next quote"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="head">
+      <p class="mono">Request an appointment</p>
+      <h2>Tell us when suits you.</h2>
+      <p>Fill this in and the message below is written for you. Sending it opens WhatsApp. Nothing is saved on this page.</p>
+    </div>
+    <div class="book">
+      <form id="bf" autocomplete="off">
+        <div class="f"><label for="nm">Your name</label><input id="nm" type="text" placeholder="Full name"></div>
+        <div class="f"><label for="who">Consultation for</label>
+          <select id="who"><option>Myself, an adult</option><option>My child</option><option>A senior family member</option></select></div>
+        <div class="f full"><label for="cn">Area of concern</label>
+          <select id="cn"><option>Not sure yet</option><option>Skin</option><option>Digestion</option><option>Allergies</option><option>Women's health</option><option>Children's health</option><option>Sleep</option><option>Stress</option><option>Lifestyle</option><option>Follow-up visit</option></select></div>
+        <div class="f"><label for="dy">Preferred day</label>
+          <select id="dy"><option>Any day</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option></select></div>
+        <div class="f"><label for="tm">Preferred time</label>
+          <select id="tm"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select></div>
+        <div class="f full"><label for="nt">Short note (optional)</label><textarea id="nt" placeholder="Keep it brief. You can explain more during the consultation."></textarea></div>
+      </form>
+      <aside class="preview" aria-live="polite">
+        <p class="mono">Your WhatsApp message</p>
+        <div class="bubble" id="bub"></div>
+        <div class="row">
+          <a class="btn" id="send" data-wa-send href="#book">Send on WhatsApp</a>
+          <button class="btn ghost" id="cpy" type="button">Copy message</button>
+        </div>
+        <p class="hint" id="hint"></p>
+        <ol class="how"><li>Tap <b>Send on WhatsApp</b>.</li><li>WhatsApp opens with your message ready.</li><li>Press send there. The clinic replies to confirm your time.</li></ol>
+      </aside>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="head"><p class="mono">Visit the clinic</p><h2>Where and when.</h2></div>
+    <div class="visit">
+      <div class="box">
+        <h3>Opening hours</h3>
+        <p class="open" id="openNow" hidden><i></i><span></span></p>
+        <div class="hrs">
+          <div><span>Monday to Friday</span><b data-c="h1" class="tbc">to confirm</b></div>
+          <div><span>Saturday</span><b data-c="h2" class="tbc">to confirm</b></div>
+          <div><span>Sunday</span><b data-c="h3" class="tbc">to confirm</b></div>
+        </div>
+      </div>
+      <div class="box">
+        <h3>Address</h3>
+        <p><b data-c="clinic" class="tbc">Clinic name</b><br><span data-c="address" class="tbc">Clinic address, area, pin code</span></p>
+        <p style="margin-top:10px">Phone: <span data-c="phone" class="tbc">to confirm</span></p>
+        <a class="btn ghost" id="maps" href="#visit">Open in Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="head"><p class="mono">Questions</p><h2>Before you come in.</h2></div>
+    <details><summary>Why homeopathy?</summary><p>Homeopathy looks at the whole person, not only the diagnosis. Remedies are chosen using your symptoms together with sleep, appetite, stress and temperament. Many people choose it because they want an individual, unhurried consultation and a gentle approach, often alongside their regular care. It is a personal choice, best made with a qualified doctor.</p></details>
+    <details><summary>Who developed homeopathy?</summary><p>Homeopathy was developed by Dr. Samuel Hahnemann (1755 to 1843), a German physician. He set out its principles in the 1790s and published them in <i>The Organon of Medicine</i>, first issued in 1810. It spread across Europe, reached India in the 19th century, and is today one of the AYUSH systems of medicine in India.</p></details>
+    <details><summary>Common misconceptions about homeopathy</summary>
+      <ul>
+        <li><b>"It is the same as herbal medicine."</b> It is not. Homeopathic remedies can come from plants, minerals and other sources, and are prepared by a specific method of serial dilution.</li>
+        <li><b>"It only works slowly, or only for minor problems."</b> The pace and the benefit depend on the person and the condition. Dr. Pradnya will tell you honestly what to expect, and when you need other medical care.</li>
+        <li><b>"It replaces all other medicines."</b> No. It can be used alongside conventional care and should never replace urgent treatment. Do not stop a prescribed medicine without medical advice.</li>
+        <li><b>"It is only a placebo."</b> This is debated. Scientific studies have not all agreed, and major reviews have found limited evidence for some conditions. Many patients value the individual attention and report benefit. Ask questions during your consultation and expect straight answers.</li>
+        <li><b>"Natural means risk-free."</b> Any treatment is best taken under a qualified doctor's guidance, with a full history of what else you take.</li>
+      </ul>
+    </details>
+    <details><summary>Do I need an appointment?</summary><p>Appointments are best, so you are not kept waiting. Use the form above or message the clinic on WhatsApp.</p></details>
+    <details><summary>Should I bring my reports and medicines?</summary><p>Yes. Bring any recent reports, prescriptions and a list of what you currently take, so the doctor has the full picture.</p></details>
+    <details><summary>Can I stop my current medicines?</summary><p>No. Never stop or change a prescribed medicine without talking to the doctor who prescribed it. Tell Dr. Gawande about everything you take.</p></details>
+    <details><summary>Is homeopathy right for emergencies?</summary><p>No. For severe pain, breathing trouble, heavy bleeding, chest pain or any emergency, go to the nearest hospital or call emergency services.</p></details>
+    <details><summary>How long does a consultation take?</summary><p>The first visit is usually longer because it covers your history in detail. <span class="tbc">Add the clinic's usual time here.</span></p></details>
+  </section>
+</main>
+
+<footer>
+  <span><b>Dr. Pradnya's Homeopathy Clinic</b> &middot; Near Reshimbagh, Nagpur</span>
+  <span>This website gives general information and is not medical advice. Results vary from person to person.</span>
+</footer>
+</div>
+
+<div class="dock"><a class="btn" data-wa href="#book">Book a consultation</a></div>
+
+<script>
+/* ============ CLINIC DETAILS: fill these in, leave a value "" to keep the highlighted placeholder ============ */
+var C = {
+  whatsapp: "",            /* country code + number, digits only, e.g. 919876543210 */
+  phone: "",               /* shown to visitors, e.g. +91 98765 43210 */
+  clinic: "Dr. Pradnya's Homeopathy Clinic",
+  address: "Near Reshimbagh, Nagpur, Maharashtra",   /* add the full address and pin code when you have it */
+  h1: "10 am to 3 pm, 6 pm to 10 pm",   /* Monday to Friday */
+  h2: "From 10 am",                      /* Saturday: add the closing time */
+  h3: ""                                 /* Sunday */
+};
+/* ================================================================================================== */
+
+(function () {
+  var doc = document;
+  var ready = /^\d{10,15}$/.test(C.whatsapp);
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* fill details */
+  doc.querySelectorAll("[data-c]").forEach(function (el) {
+    var v = C[el.getAttribute("data-c")];
+    if (v) { el.textContent = v; el.classList.remove("tbc"); }
+  });
+  var base = "Hello Dr. Pradnya, I would like to book a consultation.";
+  function waUrl(text) { return "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(text); }
+  doc.querySelectorAll("[data-wa]").forEach(function (a) {
+    if (ready) { a.href = waUrl(base); a.target = "_blank"; a.rel = "noopener"; }
+  });
+  var maps = doc.getElementById("maps");
+  if (C.address) { maps.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent((C.clinic ? C.clinic + " " : "") + C.address); maps.target = "_blank"; maps.rel = "noopener"; }
+
+  /* theme toggle */
+  var root = doc.documentElement;
+  doc.getElementById("theme").addEventListener("click", function () {
+    var cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+    colors();
+  });
+
+  /* stepper */
+  var steps = [
+    ["Listen", "A first conversation about what you are experiencing, how it affects your day, and your health history so far."],
+    ["Understand", "Questions about sleep, appetite, energy, stress and routine, because homeopathic case-taking looks at the whole person."],
+    ["Plan", "Your doctor suggests a plan, explains how to take it, what to keep track of, and what to expect next."],
+    ["Follow up", "A review visit to see how you are doing, with changes to the plan if they are needed."]
+  ];
+  var tabs = Array.prototype.slice.call(doc.querySelectorAll(".tab"));
+  var fg = doc.getElementById("fg"), C0 = 326.7;
+  function pick(i, focus) {
+    tabs.forEach(function (t, k) { t.setAttribute("aria-selected", k === i ? "true" : "false"); t.tabIndex = k === i ? 0 : -1; });
+    doc.getElementById("steph").textContent = steps[i][0];
+    doc.getElementById("stepp").textContent = steps[i][1];
+    doc.getElementById("stepn").textContent = (i + 1) + "/4";
+    doc.getElementById("pn").setAttribute("aria-labelledby", "t" + i);
+    fg.style.strokeDashoffset = String(C0 * (1 - (i + 1) / 4));
+    if (focus) tabs[i].focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { pick(i); });
+    t.addEventListener("keydown", function (e) {
+      var n = i;
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") n = (i + 1) % 4;
+      else if (e.key === "ArrowUp" || e.key === "ArrowLeft") n = (i + 3) % 4;
+      else return;
+      e.preventDefault(); pick(n, true);
+    });
+  });
+  pick(0);
+
+  /* card tilt and glow */
+  var fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  doc.querySelectorAll(".tilt").forEach(function (c) {
+    c.addEventListener("pointermove", function (e) {
+      var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.setProperty("--mx", (x * 100) + "%"); c.style.setProperty("--my", (y * 100) + "%");
+      if (fine && !reduce) c.style.transform = "perspective(700px) rotateX(" + ((0.5 - y) * 7) + "deg) rotateY(" + ((x - 0.5) * 9) + "deg) translateY(-3px)";
+    });
+    c.addEventListener("pointerleave", function () { c.style.transform = ""; });
+  });
+
+  /* vial follows pointer slightly */
+  var vial = doc.getElementById("vial"), stage = doc.getElementById("stage");
+  if (fine && !reduce) {
+    stage.addEventListener("pointermove", function (e) {
+      var r = stage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      vial.style.transform = "perspective(800px) rotateY(" + (x * 16) + "deg) rotateX(" + (-y * 10) + "deg)";
+    });
+    stage.addEventListener("pointerleave", function () { vial.style.transform = ""; });
+  }
+
+  /* booking message */
+  var ids = ["nm", "who", "cn", "dy", "tm", "nt"], el = {};
+  ids.forEach(function (i) { el[i] = doc.getElementById(i); });
+  var bub = doc.getElementById("bub"), send = doc.getElementById("send"), hint = doc.getElementById("hint");
+  function message() {
+    var l = [base];
+    if (el.nm.value.trim()) l.push("Name: " + el.nm.value.trim());
+    l.push("For: " + el.who.value);
+    l.push("Area of concern: " + el.cn.value);
+    l.push("Preferred: " + el.dy.value + ", " + el.tm.value);
+    if (el.nt.value.trim()) l.push("Note: " + el.nt.value.trim());
+    return l.join("\n");
+  }
+  function update() {
+    var m = message(); bub.textContent = m;
+    if (ready) { send.href = waUrl(m); send.target = "_blank"; send.rel = "noopener"; hint.textContent = "Sending opens WhatsApp with this message ready. Share only what you are comfortable with."; }
+    else { send.href = "#book"; hint.textContent = "The send button switches on once the clinic's WhatsApp number is added. You can copy the message meanwhile."; }
+  }
+  ids.forEach(function (i) { el[i].addEventListener("input", update); el[i].addEventListener("change", update); });
+  doc.getElementById("bf").addEventListener("submit", function (e) { e.preventDefault(); });
+  doc.getElementById("cpy").addEventListener("click", function () {
+    var b = this, t = message();
+    function done(ok) { b.textContent = ok ? "Copied" : "Select and copy"; setTimeout(function () { b.textContent = "Copy message"; }, 1800); }
+    function sel() { var r = doc.createRange(); r.selectNodeContents(bub); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    try { navigator.clipboard.writeText(t).then(function () { done(true); }, function () { sel(); done(false); }); }
+    catch (e) { sel(); done(false); }
+  });
+  update();
+
+  /* quotes */
+  var Q = [
+    ["The physician's high and only mission is to restore the sick to health, to cure, as it is termed.", "Samuel Hahnemann, Organon of Medicine, aphorism 1"],
+    ["The highest ideal of cure is rapid, gentle and permanent restoration of the health…", "Samuel Hahnemann, Organon of Medicine, aphorism 2 (excerpt)"],
+    ["Similia similibus curentur.", "“Let likes be cured by likes.” The guiding principle of homeopathy, from Samuel Hahnemann"]
+  ];
+  var qi = 0, qt = doc.getElementById("qt"), qa = doc.getElementById("qa"), qf = doc.getElementById("qf"), dots = doc.getElementById("dots"), qtimer = null;
+  function qmark() { Array.prototype.forEach.call(dots.children, function (b, k) { b.setAttribute("aria-current", k === qi ? "true" : "false"); }); }
+  function qstop() { if (qtimer) { clearInterval(qtimer); qtimer = null; } }
+  function qshow(i, user) {
+    qi = (i + Q.length) % Q.length; if (user) qstop();
+    qf.classList.add("swap");
+    setTimeout(function () { qt.textContent = Q[qi][0]; qa.textContent = Q[qi][1]; qf.classList.remove("swap"); qmark(); }, reduce ? 0 : 220);
+  }
+  Q.forEach(function (q, i) {
+    var b = doc.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Show quote " + (i + 1));
+    b.addEventListener("click", function () { qshow(i, true); }); dots.appendChild(b);
+  });
+  doc.getElementById("qprev").addEventListener("click", function () { qshow(qi - 1, true); });
+  doc.getElementById("qnext").addEventListener("click", function () { qshow(qi + 1, true); });
+  qf.parentNode.addEventListener("pointerenter", qstop);
+  qf.parentNode.addEventListener("focusin", qstop);
+  qmark();
+  if (!reduce) qtimer = setInterval(function () { qshow(qi + 1); }, 9000);
+
+  /* open now badge (Monday to Friday slots; update SLOTS if the hours change) */
+  var SLOTS = [[600, 900], [1080, 1320]];
+  function fmt(m) { var h = Math.floor(m / 60), ap = h >= 12 ? "pm" : "am"; h = h % 12 || 12; return h + " " + ap; }
+  try {
+    var o = {};
+    new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kolkata", weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false })
+      .formatToParts(new Date()).forEach(function (x) { o[x.type] = x.value; });
+    var mins = (parseInt(o.hour, 10) % 24) * 60 + parseInt(o.minute, 10), txt = "", on = false;
+    if (["Mon", "Tue", "Wed", "Thu", "Fri"].indexOf(o.weekday) > -1) {
+      var cur = SLOTS.filter(function (z) { return mins >= z[0] && mins < z[1]; })[0];
+      if (cur) { on = true; txt = "Open now, until " + fmt(cur[1]); }
+      else { var nx = SLOTS.filter(function (z) { return mins < z[0]; })[0]; txt = nx ? "Closed now, opens at " + fmt(nx[0]) : "Closed for today"; }
+    } else if (o.weekday === "Sat" && mins < 600) { txt = "Closed now, opens at 10 am"; }
+    if (txt) { var ob = doc.getElementById("openNow"); ob.hidden = false; ob.className = "open" + (on ? " on" : ""); ob.querySelector("span").textContent = txt; }
+  } catch (e) {}
+
+  /* hero pellet field */
+  var cv = doc.getElementById("field"), ctx = cv.getContext("2d"), P = [], W = 0, H = 0, mx = -999, my = -999, dpr = 1, rgbA = "23,121,90", rgbB = "111,86,201", running = true;
+  function rgb(v) { var d = doc.createElement("span"); d.style.color = v; doc.body.appendChild(d); var c = getComputedStyle(d).color; doc.body.removeChild(d); var m = c.match(/\d+/g); return m ? m[0] + "," + m[1] + "," + m[2] : "23,121,90"; }
+  function colors() { rgbA = rgb("var(--accent)"); rgbB = rgb("var(--accent2)"); if (reduce) draw(); }
+  function size() {
+    var r = cv.parentNode.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var n = Math.round(Math.min(70, Math.max(24, W / 16))); P = [];
+    for (var i = 0; i < n; i++) P.push({ x: Math.random() * W, y: Math.random() * H, r: 2 + Math.random() * 6, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3, k: Math.random() < .25 });
+    if (reduce) draw();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < P.length; i++) {
+      var p = P[i], c = p.k ? rgbB : rgbA;
+      var g = ctx.createRadialGradient(p.x - p.r * .3, p.y - p.r * .3, 0, p.x, p.y, p.r);
+      g.addColorStop(0, "rgba(255,255,255,.9)"); g.addColorStop(.35, "rgba(" + c + ",.38)"); g.addColorStop(1, "rgba(" + c + ",.12)");
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fillStyle = g; ctx.fill();
+    }
+  }
+  function tick() {
+    if (!running) return;
+    for (var i = 0; i < P.length; i++) {
+      var p = P[i], dx = p.x - mx, dy = p.y - my, d2 = dx * dx + dy * dy;
+      if (d2 < 14400) { var d = Math.sqrt(d2) || 1, f = (120 - d) / 120; p.vx += dx / d * f * .35; p.vy += dy / d * f * .35; }
+      p.vx *= .985; p.vy *= .985; p.x += p.vx; p.y += p.vy;
+      if (p.x < -10) p.x = W + 10; if (p.x > W + 10) p.x = -10; if (p.y < -10) p.y = H + 10; if (p.y > H + 10) p.y = -10;
+    }
+    draw(); requestAnimationFrame(tick);
+  }
+  cv.parentNode.addEventListener("pointermove", function (e) { var r = cv.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+  cv.parentNode.addEventListener("pointerleave", function () { mx = my = -999; });
+  if (window.ResizeObserver) new ResizeObserver(size).observe(cv.parentNode); else window.addEventListener("resize", size);
+  colors(); size();
+  if (!reduce) {
+    if (window.IntersectionObserver) new IntersectionObserver(function (en) { var v = en[0].isIntersecting; if (v && !running) { running = true; tick(); } else if (!v) running = false; }).observe(cv.parentNode);
+    tick();
+  }
+})();
+</script>
+</body>
+</html>
